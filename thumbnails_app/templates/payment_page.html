@@ -1,0 +1,11 @@
+<h2>Simulated Payment</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>Click the button to simulate a payment:</p>
+    <button type="submit" name="pay">Simulate Payment</button>
+</form>
+<form method="post">
+    {% csrf_token %}
+    <p>Click the button to simulate a payment failure:</p>
+    <button type="submit" name="fail">Simulate Payment Failure</button>
+</form>

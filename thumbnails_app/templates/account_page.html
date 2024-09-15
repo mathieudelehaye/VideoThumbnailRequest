@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form-styles.css' %}">
+    <!-- Load Font Awesome for the user icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <title>Account Page</title>
+</head>
+
+<body class="account-body">
+    <div class="header">
+        <div class="icon-title-container">
+            <div class="icon-container">
+                <a href="{% url 'submit_thumbnail' %}">
+                    <img src="{% static 'icons/submit_icon.png' %}" alt="Submit Thumbnail" class="account-icon">
+                </a>
+            </div>
+            
+            <div class="title-container">
+                <h1 class="page-title">My Thumbnail Requests</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Loop through each thumbnail request -->
+        {% for thumbnail in thumbnails %}
+        <div class="grid">
+            <div class="item">
+                <!-- Create a 1x4 grid within each item -->
+                <div class="inner-grid">
+                    <div class="quarter">
+                        {% if thumbnail.reference_image %}
+                            <img class="img-fluid" src="{{ thumbnail.reference_image.url }}" alt="Reference Image">
+                        {% else %}
+                            <p>No reference image available</p>
+                        {% endif %}
+                    </div>
+                    <div class="quarter">
+                        {% if thumbnail.thumbnail_file %}
+                            <img class="img-fluid" src="{{ thumbnail.thumbnail_file.url }}" alt="Completed Thumbnail">
+                        {% else %}
+                            <p>No thumbnail available</p>
+                        {% endif %}
+                    </div>
+                    <div class="quarter">
+                        <h3>Idea: {{ thumbnail.idea }}</h3>
+                    </div>
+                    <div class="quarter">
+                        <h3>Status: {{ thumbnail.get_status_display }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+<footer class="footer">
+    <p>&copy; Mathieu Delehaye 2024</p>
+</footer>
+
+</html>

@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: #eceffc;
+}
+
+.submit-body {
+  display: flex;
+}
+
+.form-container {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+input, textarea, button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #3bafda;
+}
+
+button {
+  background-color: #3bafda;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2d334c;
+}
+
+.account-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.user-icon {
+  font-size: 40px;
+  color: #3bafda;
+  transition: color 0.3s ease;
+}
+
+.user-icon:hover {
+  color: #2d334c;
+}
+
+.account-label {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+.account-link a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling for the logout button */
+.account-button {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.logout-form {
+  display: flex;
+  justify-content: center;   /* Centers the form horizontally */
+  align-items: center;       /* Centers the contents vertically */
+  margin: 20px 0;            /* Adds space around the form */
+}
+
+/* Icon for the logout button */
+
+/* Icon container for logout, ensuring it's circular and the same size as account icon */
+.logout-icon-container {
+  width: 40px;
+  height: 40px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+/* Icon for the logout button */
+.logout-button .account-photo {
+  font-size: 20px;
+  color: #333;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: auto;
+  text-align: center; 
+}
+
+.account-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+/* Hover effect for both the account and logout buttons */
+.account-button:hover .account-text {
+  color: #3bafda;
+}
+.account-button:hover .account-photo {
+  color: #3bafda;
+}
+
+.header {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  background-color: #eceffc; /* Use same color as your Submit page */
+}
+
+.icon-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.account-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+.icon-container {
+  position: absolute; /* Position icon independently of the title */
+  left: 20px;         /* Align icon to the left */
+  top: 20px;          /* Ensure the icon stays at the top */
+}
+
+.title-container {
+  text-align: center;
+  width: 100%;        /* Ensures title takes full width for center alignment */
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+/* Main container and grid */
+.container {
+  display: block;
+  width: 60%; /* Limit the grid to 50% of the page width */
+  margin: 0 auto; /* Center the grid */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #eceffc;
+}
+
+.grid {
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+}
+
+/* Styling for individual grid items */
+.item {
+  display: block;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* Inner grid inside each item to create the 1x4 layout */
+.inner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+  gap: 10px;
+}
+
+/* Each quarter (one of the 4 sections) */
+.quarter {
+  background-color: #eceffc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Style the images */
+.quarter img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Text styling for idea and status */
+.quarter h3 {
+  font-size: 16px;
+  color: #333;
+}
+
+.footer {
+  text-align: center;
+  position: fixed; /* Keeps the footer at the bottom of the page */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #eceffc; /* Matching the rest of your color scheme */
+  padding: 10px 0;
+  font-size: 14px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+}

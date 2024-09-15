@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form-styles.css' %}">
+    <!-- Load Font Awesome for the user icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <title>Submit Thumbnail Request</title>
+</head>
+
+<body class="submit-body">
+
+    <div class="form-container">
+    <h2>Submit Thumbnail Request</h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit & Proceed to Payment</button>
+    </form>
+    
+    <!-- User Account Icon with "My Account" label -->
+    <div class="account-link">
+        <a href="{% url 'account_page' %}">
+            <i class="fas fa-user-circle user-icon"></i>
+            <div class="account-label">My Account</div>
+        </a>
+    </div>
+
+    <!-- Logout Button -->
+    <form method="post" action="{% url 'logout' %}" class="account-button logout-form">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">
+            <div class="logout-icon-container">
+                <i class="fas fa-sign-out-alt account-photo"></i>
+            </div>
+            <span class="account-text">Logout</span>
+        </button>
+    </form>
+</div>
+
+</body>
+
+<footer class="footer">
+    <p>&copy; Mathieu Delehaye 2024</p>
+</footer>
+
+</html>
