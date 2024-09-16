@@ -1,5 +1,5 @@
 # VideoThumbnailRequest
-A Python Django-based SaaS for ordering, paying for, and receiving custom video thumbnails directly in your account.
+A Python Django-based SaaS platform for ordering, paying via PayPal, and receiving custom video thumbnails directly in your account.
 
 <p float="left">
   <img src="screenshots/Screenshot00.png" alt="Screenshot00.png" style="float: left; margin-right: 10px;" width="600" hspace="10" />
@@ -11,4 +11,8 @@ A Python Django-based SaaS for ordering, paying for, and receiving custom video 
 
 <p float="left">
   <img src="screenshots/Screenshot02.png" alt="Screenshot02.png" style="float: left; margin-right: 10px;" width="600" hspace="10" />
+</p>
+
+<p float="left">
+  <img src="screenshots/Screenshot02.png" alt="Screenshot03.png" style="float: left; margin-right: 10px;" width="600" hspace="10" />
 </p>
