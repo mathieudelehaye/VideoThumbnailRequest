@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from .models import ThumbnailRequest
+from paypalrestsdk import Payment
 from thumbnails_app.forms import ThumbnailRequestForm
 from thumbnails_app.models import ThumbnailRequest
 
@@ -22,17 +23,11 @@ def submit_thumbnail_request(request):
             thumbnail_request.save()
             
             # Redirect to payment or success page
-            return redirect('payment_page')
+            return redirect('create_payment')
     else:
         form = ThumbnailRequestForm()
 
     return render(request, 'submit_thumbnail.html', {'form': form})
-
-@login_required  # Ensure only logged-in users can access the account page
-def account_page(request):
-    # Filter thumbnail requests to only show the ones that belong to the logged-in user
-    thumbnails = ThumbnailRequest.objects.filter(user=request.user)
-    return render(request, 'account_page.html', {'thumbnails': thumbnails})
 
 def signup(request):
     if request.method == 'POST':
@@ -46,23 +41,52 @@ def signup(request):
 
     return render(request, 'registration/signup.html', {'form': form})
 
-def payment_page(request):
-    if request.method == 'POST':
-        # Simulate successful or failed payment based on user input
-        if 'pay' in request.POST:
-            return redirect('payment_success')
-        else:
-            return redirect('payment_failed')
-    
-    return render(request, 'payment_page.html')
+@login_required  # Ensure only logged-in users can access the account page
+def account_page(request):
+    # Filter thumbnail requests to only show the ones that belong to the logged-in user
+    thumbnails = ThumbnailRequest.objects.filter(user=request.user)
+    return render(request, 'account_page.html', {'thumbnails': thumbnails})
 
-def payment_success(request):
-    # Simulate a successful payment page
-    return render(request, 'payment_success.html')
+@login_required
+def create_payment(request):
+    payment = Payment({
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "transactions": [{
+            "amount": {
+                "total": "10.00",
+                "currency": "USD"
+            },
+            "description": "Video Thumbnail Payment"
+        }],
+        "redirect_urls": {
+            "return_url": "http://localhost:8000/payment/execute/",
+            "cancel_url": "http://localhost:8000/payment/cancel/"
+        }
+    })
 
-def payment_failed(request):
-    # Simulate a failed payment page
-    return render(request, 'payment_failed.html')
+    if payment.create():
+        for link in payment.links:
+            if link.method == "REDIRECT":
+                # Redirect the user to PayPal for payment approval
+                return redirect(link.href)
+    else:
+        print(payment.error)
+        return render(request, 'payment_failed.html')
+
+@login_required
+def execute_payment(request):
+    payment_id = request.GET.get('paymentId')
+    payer_id = request.GET.get('PayerID')
+
+    payment = Payment.find(payment_id)
+
+    if payment.execute({"payer_id": payer_id}):
+        return render(request, 'payment_success.html')
+    else:
+        return render(request, 'payment_failed.html')
 
 @login_required
 def account_page(request):

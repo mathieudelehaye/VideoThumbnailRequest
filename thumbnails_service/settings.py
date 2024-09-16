@@ -12,9 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import json
+import paypalrestsdk
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+with open(BASE_DIR / 'settings.json') as f:
+    config = json.load(f)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -76,7 +81,7 @@ WSGI_APPLICATION = "thumbnails_service.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / config['DB_NAME'],
     }
 }
 
@@ -144,3 +149,13 @@ TEMPLATES = [
         },
     },
 ]
+
+PAYPAL_CLIENT_ID = config['PAYPAL_CLIENT_ID']
+PAYPAL_CLIENT_SECRET = config['PAYPAL_CLIENT_SECRET']
+PAYPAL_MODE = 'sandbox'  # Use 'live' for production
+
+paypalrestsdk.configure({
+  "mode": "sandbox",  # or "live" for production
+  "client_id": PAYPAL_CLIENT_ID,
+  "client_secret": PAYPAL_CLIENT_SECRET
+})

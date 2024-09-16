@@ -32,10 +32,8 @@ urlpatterns = [
 
     path('admin/', admin.site.urls), 
 
-    # Simulated payment page
-    path('payment/', views.payment_page, name='payment_page'),
-    path('payment/success/', views.payment_success, name='payment_success'),
-    path('payment/failed/', views.payment_failed, name='payment_failed'),
+    path('payment/create/', views.create_payment, name='create_payment'),
+    path('payment/execute/', views.execute_payment, name='execute_payment'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
